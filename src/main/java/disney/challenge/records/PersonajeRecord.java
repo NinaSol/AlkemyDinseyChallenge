@@ -1,7 +1,13 @@
 package disney.challenge.records;
 
-public class PersonajeRecord {
+public interface PersonajeRecord {
 	
-	public String image;
-	public String name;
+	
+
+	public String getNombre();
+
+	public String getImagen();
+	
+	
+	
 }

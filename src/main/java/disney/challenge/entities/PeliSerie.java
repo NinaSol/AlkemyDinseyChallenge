@@ -52,7 +52,7 @@ public class PeliSerie implements Serializable{
 	@JoinColumn(name="genero_id")
 	private Genero genero;
 	
-	@ManyToMany(mappedBy = "pelisSeries") //definir luego el cascade type y su fetch type
+	@ManyToMany(mappedBy = "pelisSeries") 
 	private Set<Personaje> personajes = new HashSet<Personaje>();
 
 	public Long getId() {

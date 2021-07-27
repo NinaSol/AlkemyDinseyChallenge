@@ -1,11 +1,13 @@
 package disney.challenge.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
@@ -35,46 +37,9 @@ public class Genero implements Serializable{
 	//agregar "" "" "" "" "" es del mismo genero que se agregue
 	//todo seria ALL
 	//mapeo el atributo genre de PeliSerie
+	@JsonBackReference
 	@OneToMany(mappedBy = "genero", cascade = CascadeType.ALL)
-	private Set<PeliSerie> pelisSeries = new HashSet<PeliSerie>();
+	private List<PeliSerie> pelisSeries = new ArrayList<PeliSerie>();
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-
-	public Set<PeliSerie> getPelisSeries() {
-		return pelisSeries;
-	}
-
-	public void setPelisSeries(Set<PeliSerie> pelisSeries) {
-		this.pelisSeries = pelisSeries;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	
 }

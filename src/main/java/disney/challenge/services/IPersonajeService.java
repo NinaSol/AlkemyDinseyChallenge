@@ -8,11 +8,16 @@ import disney.challenge.records.PersonajeRecord;
 
 public interface IPersonajeService {
 	
-	public List<PersonajeRecord> getAllRecord();
+	public List<PersonajeRecord> getAllRecords();
+	
+	public Personaje getAllDetail(Long id);
 		
-	public Personaje updateOrCreate(Personaje p);
+	public void create(Personaje p);
+	
+	public void update(Long id, Personaje p);
 		
 	public void delete(Long id);
 	
+	public void addPeliSerie(Long id, Long idPeliSerie);
 	
 }

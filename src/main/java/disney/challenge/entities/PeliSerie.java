@@ -1,12 +1,13 @@
 package disney.challenge.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -52,70 +57,10 @@ public class PeliSerie implements Serializable{
 	@JoinColumn(name="genero_id")
 	private Genero genero;
 	
-	@ManyToMany(mappedBy = "pelisSeries") 
-	private Set<Personaje> personajes = new HashSet<Personaje>();
+	@JsonBackReference
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "pelisSeries", cascade = { CascadeType.ALL}) 
+	private List<Personaje> personajes = new ArrayList<Personaje>();
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	
-
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getFeachaCreacion() {
-		return feachaCreacion;
-	}
-
-	public void setFeachaCreacion(String feachaCreacion) {
-		this.feachaCreacion = feachaCreacion;
-	}
-
-	public int getCalificacion() {
-		return calificacion;
-	}
-
-	public void setCalificacion(int calificacion) {
-		this.calificacion = calificacion;
-	}
-
-	public Genero getGenero() {
-		return genero;
-	}
-
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
-
-	public Set<Personaje> getPersonajes() {
-		return personajes;
-	}
-
-	public void setPersonajes(Set<Personaje> personajes) {
-		this.personajes = personajes;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	
 }

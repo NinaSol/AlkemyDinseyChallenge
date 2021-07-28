@@ -38,7 +38,7 @@ public class Genero implements Serializable{
 	//todo seria ALL
 	//mapeo el atributo genre de PeliSerie
 	@JsonBackReference
-	@OneToMany(mappedBy = "genero", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "genero", cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	private List<PeliSerie> pelisSeries = new ArrayList<PeliSerie>();
 
 	

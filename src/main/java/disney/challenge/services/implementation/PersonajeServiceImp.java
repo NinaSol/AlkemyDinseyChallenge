@@ -1,4 +1,4 @@
-package disney.challenge.services.implementation;
+	package disney.challenge.services.implementation;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,13 +39,40 @@ public class PersonajeServiceImp implements IPersonajeService {
 		return this.iPersonajeRepository.findById(id).orElse(null);
 	}
 	
+	@Override
+	public List<Personaje> getAllByNombre(String nombre) {
+		return this.iPersonajeRepository.getAllByNombre(nombre);
+	}
+
+	@Override
+	public List<Personaje> getAllByEdad(int edad) {
+		return this.iPersonajeRepository.getAllByEdad(edad);
+	}
+
+	@Override
+	public List<Personaje> getAllByPeso(double peso) {
+		return this.iPersonajeRepository.getAllByPeso(peso);
+	}
+
+	@Override
+	public List<Personaje> getAllByPeliSerie(Long idPeliSerie) {
+		PeliSerie peliSerie = null;
+		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(idPeliSerie);
+		if(optionalPeliSerie.isPresent()) {
+			peliSerie = optionalPeliSerie.get();
+		}
+		return peliSerie.getPersonajes();
+	}
+	
 	/* delete requests */
 
 	@Override
 	public void delete(Long id) {
 		Optional<Personaje> optionalPersonaje = this.iPersonajeRepository.findById(id);
 		if (optionalPersonaje.isPresent()) {
-			this.iPersonajeRepository.deleteById(id);
+			Personaje personaje = optionalPersonaje.get();
+			this.iPersonajeRepository.delete(personaje);
+			personaje.removePelisSeries();
 		}
 	}
 
@@ -70,6 +97,7 @@ public class PersonajeServiceImp implements IPersonajeService {
 			personaje.setHistoria(p.getHistoria());
 			personaje.setImagen(p.getImagen());
 			personaje.setPeso(p.getPeso());
+			this.iPersonajeRepository.save(personaje);
 		}
 
 	}
@@ -87,5 +115,7 @@ public class PersonajeServiceImp implements IPersonajeService {
 		}
 
 	}
+
+
 
 }

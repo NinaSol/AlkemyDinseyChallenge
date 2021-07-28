@@ -20,4 +20,12 @@ public interface IPersonajeService {
 	
 	public void addPeliSerie(Long id, Long idPeliSerie);
 	
+	public List<Personaje> getAllByNombre(String nombre);
+	
+	public List<Personaje> getAllByEdad(int edad);
+	
+	public List<Personaje> getAllByPeso(double peso);
+	
+	public List<Personaje> getAllByPeliSerie(Long idPeliSerie);
+	
 }

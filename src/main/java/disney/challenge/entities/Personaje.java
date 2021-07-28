@@ -39,7 +39,7 @@ public class Personaje implements Serializable {
 	@Column(name = "historia", nullable = false)
 	private String historia;
 
-	@ManyToMany(cascade = { CascadeType.ALL}, fetch=FetchType.EAGER)
+	@ManyToMany(targetEntity = PeliSerie.class, cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	@JoinTable(name = "personaje_peliSerie", joinColumns = @JoinColumn(name = "personaje_id"), inverseJoinColumns = @JoinColumn(name = "peliSerie_id"))
 	private List<PeliSerie> pelisSeries = new ArrayList<PeliSerie>();
 
@@ -49,6 +49,10 @@ public class Personaje implements Serializable {
 
 	public void addPeliSerie(PeliSerie peliSerie) {
 		this.pelisSeries.add(peliSerie);
+	}
+	
+	public void removePelisSeries() {
+		this.pelisSeries.removeAll(pelisSeries);
 	}
 
 }

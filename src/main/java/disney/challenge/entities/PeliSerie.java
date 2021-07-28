@@ -53,12 +53,12 @@ public class PeliSerie implements Serializable{
 	@Size(min = 1, max = 5)
 	private int calificacion;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="genero_id")
 	private Genero genero;
 	
 	@JsonBackReference
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "pelisSeries", cascade = { CascadeType.ALL}) 
+	@ManyToMany(targetEntity = Personaje.class,mappedBy = "pelisSeries",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}) 
 	private List<Personaje> personajes = new ArrayList<Personaje>();
 
 

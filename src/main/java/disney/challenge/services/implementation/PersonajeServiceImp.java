@@ -28,7 +28,6 @@ public class PersonajeServiceImp implements IPersonajeService {
 	/* get requests */
 
 	@Override
-	// @Transactional(readOnly = true)
 	public List<PersonajeRecord> getAllRecords() {
 		return this.iPersonajeRepository.getAllCharacters();
 

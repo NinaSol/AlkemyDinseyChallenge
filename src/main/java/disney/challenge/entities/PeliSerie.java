@@ -15,12 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -46,21 +45,24 @@ public class PeliSerie implements Serializable{
 	
 	@NotEmpty
 	@Column(name="fecha_creacion", nullable = false)
-	private String feachaCreacion;
+	private String fecha_creacion;
 	
-	@NotEmpty
 	@Column(name="calificacion")
-	@Size(min = 1, max = 5)
+	@Min(1)
+	@Max(5)
 	private int calificacion;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="genero_id")
 	private Genero genero;
 	
-	@JsonBackReference
-	@ManyToMany(targetEntity = Personaje.class,mappedBy = "pelisSeries",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}) 
+    @JsonIgnoreProperties("pelisSeries")
+	@ManyToMany(mappedBy = "pelisSeries",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY) 
 	private List<Personaje> personajes = new ArrayList<Personaje>();
-
+    
+    public void removePersonajes() {
+    	this.personajes.removeAll(personajes);
+    }
 
 	
 }

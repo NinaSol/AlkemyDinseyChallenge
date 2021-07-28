@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -31,12 +32,7 @@ public class Genero implements Serializable{
 	@Column(name = "imagen", nullable = false)
 	private String imagen;
 	
-	//agregar integridad referencial, si la peli_id no existe que no se agregue 
-	//actualizar en cascada, si una peli se actualiza que se actualize en la tabla
-	//eliminar "" "" "" "" "" "" "" "" "" "" "", si no existe mas el genero se eliminan las pelis
-	//agregar "" "" "" "" "" es del mismo genero que se agregue
-	//todo seria ALL
-	//mapeo el atributo genre de PeliSerie
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "genero", cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	private List<PeliSerie> pelisSeries = new ArrayList<PeliSerie>();

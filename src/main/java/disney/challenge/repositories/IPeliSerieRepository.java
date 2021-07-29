@@ -18,5 +18,11 @@ public interface IPeliSerieRepository extends JpaRepository<PeliSerie,Long>{
 	
 	@Query(value = "SELECT * FROM peli_Serie WHERE titulo=:titulo",nativeQuery = true )
 	public List<PeliSerie> getAllByTitulo(@Param("titulo") String titulo);
+	
+	@Query(value = "SELECT * FROM peli_serie ps ORDER BY ps.fecha_creacion asc", nativeQuery = true)
+	public List<PeliSerie> orderByAscDate();
+	
+	@Query(value = "SELECT * FROM peli_serie ps ORDER BY ps.fecha_creacion desc", nativeQuery = true)
+	public List<PeliSerie> orderByDescDate();
 
 }

@@ -26,47 +26,57 @@ import disney.challenge.services.IPeliSerieService;
 @RestController
 @RequestMapping(value = "/movies")
 public class PeliSerieController {
-	
+
 	@Autowired
 	private IPeliSerieService iPeliSerieService;
-	
+
 	@GetMapping
-	public ResponseEntity<List<PeliSerieRecord>> getAllMovies(){
+	public ResponseEntity<List<PeliSerieRecord>> getAllMovies() {
 		List<PeliSerieRecord> pelisSeries = this.iPeliSerieService.getAllMovies();
-		return new ResponseEntity<List<PeliSerieRecord>>(pelisSeries,HttpStatus.OK);
+		return new ResponseEntity<List<PeliSerieRecord>>(pelisSeries, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/detail/{id}")
 	public PeliSerie getAllDetail(@PathVariable Long id) {
 		return this.iPeliSerieService.getAllDetail(id);
 	}
-	
+
 	@GetMapping("/titulo")
-	public ResponseEntity<List<PeliSerie>> getAllByNombre(@RequestParam String titulo){
+	public ResponseEntity<List<PeliSerie>> getAllByNombre(@RequestParam String titulo) {
 		List<PeliSerie> pelisSeries = this.iPeliSerieService.getAllByTitulo(titulo);
-		return new ResponseEntity<List<PeliSerie>>(pelisSeries,HttpStatus.OK);
+		return new ResponseEntity<List<PeliSerie>>(pelisSeries, HttpStatus.OK);
+	}
+
+	@GetMapping("/genero")
+	public ResponseEntity<List<PeliSerie>> getAllByGenero(@RequestParam Long genero_id) {
+		List<PeliSerie> pelisSeries = this.iPeliSerieService.getAllByGenero(genero_id);
+		return new ResponseEntity<List<PeliSerie>>(pelisSeries, HttpStatus.OK);
 	}
 	
-	@PostMapping("/create") 
+	@GetMapping("/orden")
+	public ResponseEntity<List<PeliSerie>> getAllByDateOrder(@RequestParam String orden){
+		return new ResponseEntity<List<PeliSerie>>(this.iPeliSerieService.orderByDate(orden), HttpStatus.OK);
+	}
+
+	@PostMapping("/create")
 	public ResponseEntity<PeliSerie> create(@Valid @RequestBody PeliSerie p) {
 		this.iPeliSerieService.create(p);
-    	return new ResponseEntity<PeliSerie>(p,HttpStatus.CREATED);
+		return new ResponseEntity<PeliSerie>(p, HttpStatus.CREATED);
 	}
-	
-	@PutMapping("/update/{id}") 
+
+	@PutMapping("/update/{id}")
 	public void update(@PathVariable Long id, @Valid @RequestBody PeliSerie p) {
 		this.iPeliSerieService.update(id, p);
 	}
-	
+
 	@PutMapping("/asignGenero/{id}/{genero_id}")
-	public void agregarGenero(@PathVariable Long id,@PathVariable Long genero_id) {
+	public void agregarGenero(@PathVariable Long id, @PathVariable Long genero_id) {
 		this.iPeliSerieService.asignGenero(id, genero_id);
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable Long id) {
 		this.iPeliSerieService.delete(id);
 	}
-	
-	
+
 }

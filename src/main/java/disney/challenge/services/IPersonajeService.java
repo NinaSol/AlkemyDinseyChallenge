@@ -27,5 +27,5 @@ public interface IPersonajeService {
 	public List<Personaje> getAllByPeso(double peso);
 	
 	public List<Personaje> getAllByPeliSerie(Long idPeliSerie);
-	
+		
 }

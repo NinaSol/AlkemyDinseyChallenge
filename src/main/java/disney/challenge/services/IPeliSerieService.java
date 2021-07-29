@@ -20,7 +20,9 @@ public interface IPeliSerieService {
 		
 	public void delete(Long id);
 	
-	public List<PeliSerie> getAllByTitulo(String titulo);
+	public List<PeliSerie> getAllByTitulo(String titulo); 
 	
-	public List<PeliSerie> getAllByGenero(Long genero_id);
+	public List<PeliSerie> getAllByGenero(Long genero_id); 
+	
+	public List<PeliSerie> orderByDate(String orden);
 }

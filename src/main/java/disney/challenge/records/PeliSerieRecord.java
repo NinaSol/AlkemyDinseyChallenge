@@ -6,5 +6,5 @@ public interface PeliSerieRecord {
 	
 	public String getTitulo();
 	
-	public String getFecha_creacion();
+	public String getFechaCreacion();
 }

@@ -1,5 +1,7 @@
 package disney.challenge.services;
 
-public class IGeneroService {
+import disney.challenge.entities.Genero;
 
+public interface IGeneroService {
+	public void create(Genero g);
 }

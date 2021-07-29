@@ -1,5 +1,6 @@
 package disney.challenge.services.implementation;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class PeliSerieServiceImp implements IPeliSerieService {
 
 	@Autowired
 	IPeliSerieRepository iPeliSerieRepository;
-	
+
 	@Autowired
 	IGeneroRepository iGeneroRepository;
 
@@ -38,50 +39,6 @@ public class PeliSerieServiceImp implements IPeliSerieService {
 	}
 
 	@Override
-	public void create(PeliSerie p) {
-		this.iPeliSerieRepository.save(p);
-		
-	}
-
-	@Override
-	public void update(Long id, PeliSerie p) {
-		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(id);
-		if (optionalPeliSerie.isPresent()) {
-			PeliSerie peliSerie = optionalPeliSerie.get();
-			peliSerie.setCalificacion(p.getCalificacion());
-			peliSerie.setFecha_creacion(p.getFecha_creacion());
-			peliSerie.setGenero(p.getGenero());
-			peliSerie.setImagen(p.getImagen());
-			peliSerie.setTitulo(p.getTitulo());
-			this.iPeliSerieRepository.save(peliSerie);
-		}
-		
-	}
-	
-	@Override
-	public void asignGenero(Long id, Long genero_id) {
-		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(id);
-		Optional<Genero> optionalGenero = this.iGeneroRepository.findById(genero_id);
-		if (optionalPeliSerie.isPresent() && optionalGenero.isPresent()) {
-			PeliSerie peliSerie = optionalPeliSerie.get();
-			Genero genero = optionalGenero.get();
-			peliSerie.setGenero(genero);
-			this.iPeliSerieRepository.save(peliSerie);
-		}
-		
-	}
-
-	@Override
-	public void delete(Long id) {
-		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(id);
-		if (optionalPeliSerie.isPresent()) {
-			PeliSerie peliSerie = optionalPeliSerie.get();
-			peliSerie.removePersonajes();
-			this.iPeliSerieRepository.delete(peliSerie);
-		}
-	}
-
-	@Override
 	public List<PeliSerie> getAllByTitulo(String titulo) {
 		return this.iPeliSerieRepository.getAllByTitulo(titulo);
 	}
@@ -96,4 +53,60 @@ public class PeliSerieServiceImp implements IPeliSerieService {
 		}
 		return pelisSeries;
 	}
+
+	@Override
+	public void create(PeliSerie p) {
+		this.iPeliSerieRepository.save(p);
+
+	}
+
+	@Override
+	public void update(Long id, PeliSerie p) {
+		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(id);
+		if (optionalPeliSerie.isPresent()) {
+			PeliSerie peliSerie = optionalPeliSerie.get();
+			peliSerie.setCalificacion(p.getCalificacion());
+			peliSerie.setFechaCreacion(p.getFechaCreacion());
+			peliSerie.setGenero(p.getGenero());
+			peliSerie.setImagen(p.getImagen());
+			peliSerie.setTitulo(p.getTitulo());
+			this.iPeliSerieRepository.save(peliSerie);
+		}
+
+	}
+
+	@Override
+	public void asignGenero(Long id, Long genero_id) {
+		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(id);
+		Optional<Genero> optionalGenero = this.iGeneroRepository.findById(genero_id);
+		if (optionalPeliSerie.isPresent() && optionalGenero.isPresent()) {
+			PeliSerie peliSerie = optionalPeliSerie.get();
+			Genero genero = optionalGenero.get();
+			peliSerie.setGenero(genero);
+			this.iPeliSerieRepository.save(peliSerie);
+		}
+
+	}
+
+	@Override
+	public void delete(Long id) {
+		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(id);
+		if (optionalPeliSerie.isPresent()) {
+			PeliSerie peliSerie = optionalPeliSerie.get();
+			peliSerie.removePersonajes();
+			this.iPeliSerieRepository.delete(peliSerie);
+		}
+	}
+
+	@Override
+	public List<PeliSerie> orderByDate(String orden) {
+		List<PeliSerie> pelisSeries = null;
+		if (orden.equalsIgnoreCase("asc")) {
+			pelisSeries = this.iPeliSerieRepository.orderByAscDate();
+		}else if(orden.equalsIgnoreCase("desc")) {
+			pelisSeries = this.iPeliSerieRepository.orderByDescDate();
+		}
+		return pelisSeries;
+	}
+
 }

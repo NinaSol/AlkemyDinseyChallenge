@@ -1,6 +1,7 @@
 package disney.challenge.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -36,18 +40,19 @@ public class PeliSerie implements Serializable{
 	private Long id;
 	
 	@NotEmpty
-	@Column(name="imagen", nullable = false)
+	@Column(nullable = false)
 	private String imagen;
 	
 	@NotEmpty
-	@Column(name="titulo", nullable = false)
+	@Column(nullable = false)
 	private String titulo;
 	
-	@NotEmpty
-	@Column(name="fecha_creacion", nullable = false)
-	private String fecha_creacion;
 	
-	@Column(name="calificacion")
+	@Column
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date fechaCreacion;
+	
+	@Column
 	@Min(1)
 	@Max(5)
 	private int calificacion;

@@ -13,6 +13,7 @@ import disney.challenge.entities.AuthRequest;
 import disney.challenge.entities.Usuario;
 import disney.challenge.security.JwtUtil;
 import disney.challenge.services.IUsuarioService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,20 +26,22 @@ public class UsuarioController {
 	@Autowired
 	private IUsuarioService iUsuarioService;
 
+	@ApiOperation("Creacion de un usuario")
 	@PostMapping("/register")
 	public void register(@RequestBody Usuario usuario) throws Exception {
-		iUsuarioService.register(usuario);
+		this.iUsuarioService.register(usuario);
+			this.iUsuarioService.sendWelcomeEmail(usuario.getEmail());
 	}
 
-    @PostMapping("/login")
-    public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
-            );
-        } catch (Exception ex) {
-            throw new Exception("inavalid username/password");
-        }
-        return jwtUtil.generateToken(authRequest.getUserName());
-    }
+	@ApiOperation("Autentificacion de un usuario")
+	@PostMapping("/login")
+	public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword()));
+		} catch (Exception ex) {
+			throw new Exception("inavalid username/password");
+		}
+		return jwtUtil.generateToken(authRequest.getUserName());
+	}
 }

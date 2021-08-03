@@ -6,5 +6,5 @@ import disney.challenge.entities.Usuario;
 
 
 public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
-	Usuario findByUserName(String username);
+	Usuario findByUserName(String userName);
 }

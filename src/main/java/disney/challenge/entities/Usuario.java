@@ -18,19 +18,19 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotEmpty
-    private String userName;
-    @NotEmpty
-    private String password;
-    @Email
-    private String email;
-    
-    public Usuario(String userName, String password, String email) {
-    	this.userName = userName;
-    	this.password = password;
-    	this.email = email;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@NotEmpty
+	private String userName;
+	@NotEmpty
+	private String password;
+	@Email
+	private String email;
+
+	public Usuario(String userName, String password, String email) {
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+	}
 }

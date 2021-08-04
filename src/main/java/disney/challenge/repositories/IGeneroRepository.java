@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import disney.challenge.entities.Genero;
 
 @Repository
-public interface IGeneroRepository extends JpaRepository<Genero,Long>{
-	
+public interface IGeneroRepository extends JpaRepository<Genero, Long> {
+
 }

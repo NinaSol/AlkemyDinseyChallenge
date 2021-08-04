@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -41,8 +40,9 @@ public class Personaje implements Serializable {
 	@Column(name = "historia", nullable = false)
 	private String historia;
 
-    @JsonIgnoreProperties("personajes")
-	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.EAGER)
+	@JsonIgnoreProperties("personajes")
+	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH }, fetch = FetchType.EAGER)
 	@JoinTable(name = "personaje_peliSerie", joinColumns = @JoinColumn(name = "personaje_id"), inverseJoinColumns = @JoinColumn(name = "peliSerie_id"))
 	private List<PeliSerie> pelisSeries = new ArrayList<PeliSerie>();
 
@@ -53,7 +53,7 @@ public class Personaje implements Serializable {
 	public void addPeliSerie(PeliSerie peliSerie) {
 		this.pelisSeries.add(peliSerie);
 	}
-	
+
 	public void removePelisSeries() {
 		this.pelisSeries.removeAll(pelisSeries);
 	}

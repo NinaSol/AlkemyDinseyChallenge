@@ -1,7 +1,6 @@
 package disney.challenge.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +29,7 @@ public class UsuarioController {
 	@PostMapping("/register")
 	public void register(@RequestBody Usuario usuario) throws Exception {
 		this.iUsuarioService.register(usuario);
-			this.iUsuarioService.sendWelcomeEmail(usuario.getEmail());
+		this.iUsuarioService.sendWelcomeEmail(usuario.getEmail());
 	}
 
 	@ApiOperation("Autentificacion de un usuario")

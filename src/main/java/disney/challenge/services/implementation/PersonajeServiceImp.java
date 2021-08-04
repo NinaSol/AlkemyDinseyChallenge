@@ -1,13 +1,11 @@
-	package disney.challenge.services.implementation;
+package disney.challenge.services.implementation;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import disney.challenge.entities.PeliSerie;
 import disney.challenge.entities.Personaje;
@@ -25,8 +23,6 @@ public class PersonajeServiceImp implements IPersonajeService {
 	@Autowired
 	private IPeliSerieRepository iPeliSerieRepository;
 
-	/* get requests */
-
 	@Override
 	public List<PersonajeRecord> getAllRecords() {
 		return this.iPersonajeRepository.getAllCharacters();
@@ -37,7 +33,7 @@ public class PersonajeServiceImp implements IPersonajeService {
 	public Personaje getAllDetail(Long id) {
 		return this.iPersonajeRepository.findById(id).orElse(null);
 	}
-	
+
 	@Override
 	public List<Personaje> getAllByNombre(String nombre) {
 		return this.iPersonajeRepository.getAllByNombre(nombre);
@@ -57,13 +53,11 @@ public class PersonajeServiceImp implements IPersonajeService {
 	public List<Personaje> getAllByPeliSerie(Long idPeliSerie) {
 		PeliSerie peliSerie = null;
 		Optional<PeliSerie> optionalPeliSerie = this.iPeliSerieRepository.findById(idPeliSerie);
-		if(optionalPeliSerie.isPresent()) {
+		if (optionalPeliSerie.isPresent()) {
 			peliSerie = optionalPeliSerie.get();
 		}
 		return peliSerie.getPersonajes();
 	}
-	
-	/* delete requests */
 
 	@Override
 	public void delete(Long id) {
@@ -75,15 +69,11 @@ public class PersonajeServiceImp implements IPersonajeService {
 		}
 	}
 
-	/* post requests */
-
 	@Override
 	@Transactional
 	public void create(Personaje p) {
-			this.iPersonajeRepository.save(p);
+		this.iPersonajeRepository.save(p);
 	}
-
-	/* put requests */
 
 	@Override
 	public void update(Long id, Personaje p) {
@@ -114,7 +104,5 @@ public class PersonajeServiceImp implements IPersonajeService {
 		}
 
 	}
-
-
 
 }

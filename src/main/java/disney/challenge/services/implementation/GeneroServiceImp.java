@@ -8,14 +8,14 @@ import disney.challenge.repositories.IGeneroRepository;
 import disney.challenge.services.IGeneroService;
 
 @Service
-public class GeneroServiceImp implements IGeneroService{
+public class GeneroServiceImp implements IGeneroService {
 
 	@Autowired
 	IGeneroRepository iGeneroRepository;
-	
+
 	@Override
 	public void create(Genero g) {
 		this.iGeneroRepository.save(g);
 	}
-	
+
 }

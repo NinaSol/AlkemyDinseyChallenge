@@ -13,12 +13,13 @@ import disney.challenge.repositories.IUsuarioRepository;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
-    @Autowired
-    private IUsuarioRepository iusuarioRepository;
+	@Autowired
+	private IUsuarioRepository iusuarioRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = iusuarioRepository.findByUserName(username);
-        return new org.springframework.security.core.userdetails.User(usuario.getUserName(), usuario.getPassword(), new ArrayList<>());
-    }
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario usuario = iusuarioRepository.findByUserName(username);
+		return new org.springframework.security.core.userdetails.User(usuario.getUserName(), usuario.getPassword(),
+				new ArrayList<>());
+	}
 }

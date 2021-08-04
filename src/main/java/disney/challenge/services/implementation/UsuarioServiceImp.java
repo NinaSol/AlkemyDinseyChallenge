@@ -23,12 +23,11 @@ public class UsuarioServiceImp implements IUsuarioService {
 	private IUsuarioRepository iUsuarioRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	
+
 	@Override
 	public void register(Usuario usuario) {
-			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-			this.iUsuarioRepository.save(usuario);
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		this.iUsuarioRepository.save(usuario);
 	}
 
 	@Override
@@ -36,10 +35,10 @@ public class UsuarioServiceImp implements IUsuarioService {
 
 		Email from = new Email("pruebasprogramacion8@gmail.com");
 		String subject = "Bienvenida";
-		Email to = new Email(email);	
+		Email to = new Email(email);
 		Content content = new Content("text/plain", "Bienvenido, gracias por registrarte");
 		Mail mail = new Mail(from, subject, to, content);
-		//API KEY publica para que se pueda ver su funcionalidad sin adquirir una.
+		// API KEY publica para que se pueda ver su funcionalidad sin adquirir una.
 		SendGrid sg = new SendGrid("your sendgrid api key");
 		Request request = new Request();
 		try {

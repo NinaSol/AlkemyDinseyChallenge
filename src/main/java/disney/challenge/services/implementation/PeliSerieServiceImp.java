@@ -1,6 +1,5 @@
 package disney.challenge.services.implementation;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -103,7 +102,7 @@ public class PeliSerieServiceImp implements IPeliSerieService {
 		List<PeliSerie> pelisSeries = null;
 		if (orden.equalsIgnoreCase("asc")) {
 			pelisSeries = this.iPeliSerieRepository.orderByAscDate();
-		}else if(orden.equalsIgnoreCase("desc")) {
+		} else if (orden.equalsIgnoreCase("desc")) {
 			pelisSeries = this.iPeliSerieRepository.orderByDescDate();
 		}
 		return pelisSeries;

@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import disney.challenge.entities.Genero;
 import disney.challenge.entities.PeliSerie;
-import disney.challenge.entities.Personaje;
 import disney.challenge.records.PeliSerieRecord;
 import disney.challenge.services.IPeliSerieService;
 import io.swagger.annotations.ApiOperation;
@@ -37,12 +35,13 @@ public class PeliSerieController {
 		List<PeliSerieRecord> pelisSeries = this.iPeliSerieService.getAllMovies();
 		return new ResponseEntity<List<PeliSerieRecord>>(pelisSeries, HttpStatus.OK);
 	}
+
 	@ApiOperation("Muestra en una pelicula/serie junto a sus personajes asociados")
 	@GetMapping("/detail/{id}")
 	public PeliSerie getAllDetail(@PathVariable Long id) {
 		return this.iPeliSerieService.getAllDetail(id);
 	}
-	
+
 	@ApiOperation("Muestra una pelicula/serie al buscarla por su titulo")
 	@GetMapping("/titulo")
 	public ResponseEntity<List<PeliSerie>> getAllByNombre(@RequestParam String titulo) {
@@ -56,10 +55,10 @@ public class PeliSerieController {
 		List<PeliSerie> pelisSeries = this.iPeliSerieService.getAllByGenero(genero_id);
 		return new ResponseEntity<List<PeliSerie>>(pelisSeries, HttpStatus.OK);
 	}
-	
+
 	@ApiOperation("Muestra la lista en orden ASC,DESC por fecga de creacion")
 	@GetMapping("/orden")
-	public ResponseEntity<List<PeliSerie>> getAllByDateOrder(@RequestParam String orden){
+	public ResponseEntity<List<PeliSerie>> getAllByDateOrder(@RequestParam String orden) {
 		return new ResponseEntity<List<PeliSerie>>(this.iPeliSerieService.orderByDate(orden), HttpStatus.OK);
 	}
 
@@ -75,7 +74,7 @@ public class PeliSerieController {
 	public void update(@PathVariable Long id, @Valid @RequestBody PeliSerie p) {
 		this.iPeliSerieService.update(id, p);
 	}
-	
+
 	@ApiOperation("Le asignamos un genero a una pelicula/serie")
 	@PutMapping("/asignGenero/{id}/{genero_id}")
 	public void agregarGenero(@PathVariable Long id, @PathVariable Long genero_id) {

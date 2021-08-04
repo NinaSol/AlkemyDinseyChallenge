@@ -16,7 +16,7 @@ public class GeneroController {
 
 	@Autowired
 	IGeneroService iGeneroService;
-	
+
 	@ApiOperation("Creacion de Genero")
 	@PostMapping("/create")
 	public void create(@RequestBody Genero g) {

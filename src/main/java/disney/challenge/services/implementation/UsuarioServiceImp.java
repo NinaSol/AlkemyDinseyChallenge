@@ -1,9 +1,9 @@
 package disney.challenge.services.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -33,13 +33,13 @@ public class UsuarioServiceImp implements IUsuarioService {
 	@Override
 	public void sendWelcomeEmail(String email) throws IOException {
 
-		Email from = new Email("pruebasprogramacion8@gmail.com");
+		Email from = new Email("nina.it.02@gmail.com");
 		String subject = "Bienvenida";
 		Email to = new Email(email);
 		Content content = new Content("text/plain", "Bienvenido, gracias por registrarte");
 		Mail mail = new Mail(from, subject, to, content);
-		// API KEY publica para que se pueda ver su funcionalidad sin adquirir una.
-		SendGrid sg = new SendGrid("your sendgrid api key");
+		// agregar variable de entorno con la api key
+		SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
 		Request request = new Request();
 		try {
 			request.setMethod(Method.POST);

@@ -1,13 +1,13 @@
-package com.estudio;
+package disney.challenge;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class AlkemyJavaChallengeApplicationTests {
-
 	@Test
 	void contextLoads() {
-	}
 
+	}
 }
